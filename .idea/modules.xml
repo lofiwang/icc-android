@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/icc/icc.iml" filepath="$PROJECT_DIR$/icc/icc.iml" />
       <module fileurl="file://$PROJECT_DIR$/icc-android.iml" filepath="$PROJECT_DIR$/icc-android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/installedapk/installedapk.iml" filepath="$PROJECT_DIR$/installedapk/installedapk.iml" />
     </modules>
   </component>
 </project>
