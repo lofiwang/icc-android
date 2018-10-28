@@ -10,7 +10,7 @@ public class IccServer {
     private Context base;
     private Handler handler;
     private Context pkgContext;
-    private Handler pkgHandler;
+    private Handler pkgHandler = new PkgHandler();
 
     public IccServer(Context base, Context pkgContext, Handler handler) {
         this.base = base;
@@ -19,10 +19,10 @@ public class IccServer {
     }
 
     public final Handler getPkgHandler() {
-        return new newContextHandler();
+        return pkgHandler;
     }
 
-    public class newContextHandler extends Handler {
+    public static class PkgHandler extends Handler {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
