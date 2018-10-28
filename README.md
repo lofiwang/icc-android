@@ -6,4 +6,5 @@ Inter-context communication 一下简称icc<br>
  动态加载已安装app需要解决的问题
  * bean转换错误
  * 减少反射调用
+ * handler方式通信
  
