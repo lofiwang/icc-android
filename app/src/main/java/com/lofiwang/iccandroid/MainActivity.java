@@ -1,13 +1,12 @@
 package com.lofiwang.iccandroid;
 
 import android.app.Notification;
-import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 
-import com.lofiwang.icc.ContextUtil;
+import com.lofiwang.icc.IccClient;
 import com.lofiwang.icc.ParcelUtil;
 import com.lofiwang.icc.ParcelableTest;
 
@@ -18,8 +17,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Context newContext = ContextUtil.createContext(this, PKG);
-        Handler handler = ContextUtil.getNewCtxHandler(newContext);
+
+        IccClient iccClient = new IccClient(this, new Handler(), PKG);
+
         ParcelableTest parcelableTest = new ParcelableTest();
         parcelableTest.x = 0;
         parcelableTest.y = 1;
@@ -35,6 +35,6 @@ public class MainActivity extends AppCompatActivity {
         msg.getData().putByteArray("test", ParcelUtil.writeValue(parcelableTest));
         msg.getData().putParcelable("test1", notification);
 
-        handler.sendMessage(msg);
+        iccClient.getPkgHandler().sendMessage(msg);
     }
 }
