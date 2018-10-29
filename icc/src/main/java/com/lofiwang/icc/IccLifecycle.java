@@ -4,8 +4,8 @@ package com.lofiwang.icc;
  * Created by chunsheng.wang on 2018/10/29.
  */
 
-public interface IccLifecycle {
-    void onCreate();
+public abstract class IccLifecycle {
+    abstract protected void onCreate();
 
-    void onDestroy();
+    abstract protected void onDestroy();
 }

@@ -17,7 +17,8 @@ public class IccUtil {
         try {
             Object iccServer;
             Class clazz = pkgContext.getClassLoader().loadClass(ICC_SERVER_CLAZZ);
-            Constructor constructor = clazz.getConstructor(Context.class, Context.class, Handler.class);
+            Constructor constructor = clazz.getDeclaredConstructor(Context.class, Context.class, Handler.class);
+            constructor.setAccessible(true);
             iccServer = constructor.newInstance(base, pkgContext, handler);
             callIccServerCreate(clazz, iccServer);
             return iccServer;
@@ -40,6 +41,7 @@ public class IccUtil {
     private static final void callIccServerCreate(Class iccServerClazz, Object iccServerObj) {
         try {
             Method method = iccServerClazz.getDeclaredMethod("onCreate");
+            method.setAccessible(true);
             method.invoke(iccServerObj);
         } catch (Exception e) {
             e.printStackTrace();
@@ -49,6 +51,7 @@ public class IccUtil {
     private static final void callIccServerDestroy(Class iccServerClazz, Object iccServerObj) {
         try {
             Method method = iccServerClazz.getDeclaredMethod("onDestroy");
+            method.setAccessible(true);
             method.invoke(iccServerObj);
         } catch (Exception e) {
             e.printStackTrace();

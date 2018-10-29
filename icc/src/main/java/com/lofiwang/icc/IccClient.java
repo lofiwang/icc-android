@@ -4,7 +4,7 @@ import android.content.Context;
 import android.os.Handler;
 import android.util.Log;
 
-public class IccClient implements IccLifecycle {
+public class IccClient extends IccLifecycle {
     private static final String TAG = "IccClient";
     private Context base;
     private Handler handler;
