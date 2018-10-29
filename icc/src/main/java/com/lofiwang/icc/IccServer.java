@@ -1,6 +1,5 @@
 package com.lofiwang.icc;
 
-import android.app.Notification;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
@@ -61,15 +60,10 @@ public class IccServer extends IccLifecycle {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
+            Log.d(TAG, "handleMessage " + msg.toString());
             if (sHandlerWeakReference != null && sHandlerWeakReference.get() != null) {
                 sHandlerWeakReference.get().sendMessage(Message.obtain(msg));
             }
-            Log.d(TAG, "handleMessage1 " + msg.toString());
-            Log.d(TAG, "handleMessage2 " + msg.getData().toString());
-            ParcelableTest parcelableTest = (ParcelableTest) ParcelUtil.readValue((byte[]) msg.getData().get("test"), ParcelableTest.class);
-            Log.d(TAG, "handleMessage3 " + parcelableTest.toString());
-            Notification notification = (Notification) msg.getData().get("test1");
-            Log.d(TAG, "handleMessage4 " + notification.toString());
         }
     }
 }
