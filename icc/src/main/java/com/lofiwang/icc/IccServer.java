@@ -33,6 +33,10 @@ public class IccServer extends IccLifecycle {
         return base;
     }
 
+    public Context getPkgContext() {
+        return pkgContext;
+    }
+
     public Handler getBaseHandler() {
         return baseHandler;
     }

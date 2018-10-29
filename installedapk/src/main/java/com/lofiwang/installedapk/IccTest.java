@@ -5,6 +5,8 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
 
 import com.lofiwang.icc.IccLifecycle;
 import com.lofiwang.icc.IccServer;
@@ -22,6 +24,12 @@ public class IccTest extends IccLifecycle {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
+
+            View view = LayoutInflater.from(IccServer.peekInstance().getPkgContext()).inflate(R.layout.activity_main,null);
+            Message message = new Message();
+            message.what = 1;
+            message.obj = view;
+            IccServer.peekInstance().getBaseHandler().sendMessage(message);
             Log.d(TAG, "handleMessage1 " + msg.toString());
             Log.d(TAG, "handleMessage2 " + msg.getData().toString());
             ParcelableTest parcelableTest = (ParcelableTest) ParcelUtil.readValue((byte[]) msg.getData().get("test"), ParcelableTest.class);
@@ -34,7 +42,6 @@ public class IccTest extends IccLifecycle {
     @Override
     protected void onCreate() {
         IccServer.peekInstance().setReceiveHandler(handler);
-        Context base = IccServer.peekInstance().getBaseContext();
     }
 
     @Override

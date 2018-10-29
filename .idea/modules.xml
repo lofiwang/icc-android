@@ -3,14 +3,15 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://C:\Users\chunsheng.wang\Desktop\icc-android\app\app.iml" filepath="C:\Users\chunsheng.wang\Desktop\icc-android\app\app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../../chunsheng.wang/Desktop/icc-android/app/app.iml" filepath="$PROJECT_DIR$/../../../chunsheng.wang/Desktop/icc-android/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/icc/icc.iml" filepath="$PROJECT_DIR$/icc/icc.iml" />
-      <module fileurl="file://C:\Users\chunsheng.wang\Desktop\icc-android\icc\icc.iml" filepath="C:\Users\chunsheng.wang\Desktop\icc-android\icc\icc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../../chunsheng.wang/Desktop/icc-android/icc/icc.iml" filepath="$PROJECT_DIR$/../../../chunsheng.wang/Desktop/icc-android/icc/icc.iml" />
       <module fileurl="file://$PROJECT_DIR$/icc-android.iml" filepath="$PROJECT_DIR$/icc-android.iml" />
-      <module fileurl="file://C:\Users\chunsheng.wang\Desktop\icc-android\icc-android.iml" filepath="C:\Users\chunsheng.wang\Desktop\icc-android\icc-android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../../chunsheng.wang/Desktop/icc-android/icc-android.iml" filepath="$PROJECT_DIR$/../../../chunsheng.wang/Desktop/icc-android/icc-android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/icc-ann/icc-ann.iml" filepath="$PROJECT_DIR$/icc-ann/icc-ann.iml" />
       <module fileurl="file://$PROJECT_DIR$/icc-ann/icc-ann.iml" filepath="$PROJECT_DIR$/icc-ann/icc-ann.iml" />
       <module fileurl="file://$PROJECT_DIR$/installedapk/installedapk.iml" filepath="$PROJECT_DIR$/installedapk/installedapk.iml" />
-      <module fileurl="file://C:\Users\chunsheng.wang\Desktop\icc-android\installedapk\installedapk.iml" filepath="C:\Users\chunsheng.wang\Desktop\icc-android\installedapk\installedapk.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../../chunsheng.wang/Desktop/icc-android/installedapk/installedapk.iml" filepath="$PROJECT_DIR$/../../../chunsheng.wang/Desktop/icc-android/installedapk/installedapk.iml" />
     </modules>
   </component>
 </project>
