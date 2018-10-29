@@ -1,1 +1,1 @@
-include ':app', ':icc', ':installedapk'
+include ':app', ':icc', ':installedapk', ':icc-ann'

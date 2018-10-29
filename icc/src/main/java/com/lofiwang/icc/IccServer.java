@@ -6,14 +6,18 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 
+import java.lang.ref.WeakReference;
+
 public class IccServer extends IccLifecycle {
     private static final String TAG = "IccServer";
     private static IccServer sInstance;
-    private Handler usrHandler;
+    private static Handler sPkgHandler;
+    private static WeakReference<Handler> sHandlerWeakReference;
+
     private Context base;
     private Handler handler;
     private Context pkgContext;
-    private Handler pkgHandler;
+
 
     private IccServer(Context base, Context pkgContext, Handler handler) {
         this.base = base;
@@ -27,17 +31,17 @@ public class IccServer extends IccLifecycle {
     }
 
     public void setHandler(Handler handler) {
-        usrHandler = handler;
+        sHandlerWeakReference = new WeakReference<>(handler);
     }
 
     public void removeHandler() {
-        usrHandler = null;
+        sHandlerWeakReference = null;
     }
 
     @Override
     protected void onCreate() {
         Log.d(TAG, "onCreate");
-        pkgHandler = new PkgHandler();
+        sPkgHandler = new PkgHandler();
     }
 
     @Override
@@ -46,19 +50,19 @@ public class IccServer extends IccLifecycle {
         base = null;
         handler = null;
         pkgContext = null;
-        pkgHandler = null;
+        sPkgHandler = null;
     }
 
-    public final Handler getPkgHandler() {
-        return pkgHandler;
+    private final Handler getPkgHandler() {
+        return sPkgHandler;
     }
 
-    public class PkgHandler extends Handler {
+    public static class PkgHandler extends Handler {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            if (usrHandler != null) {
-                usrHandler.sendMessage(Message.obtain(msg));
+            if (sHandlerWeakReference != null && sHandlerWeakReference.get() != null) {
+                sHandlerWeakReference.get().sendMessage(Message.obtain(msg));
             }
             Log.d(TAG, "handleMessage1 " + msg.toString());
             Log.d(TAG, "handleMessage2 " + msg.getData().toString());

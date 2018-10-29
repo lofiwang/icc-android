@@ -62,6 +62,7 @@ public class IccUtil {
         try {
             Class clazz = pkgContext.getClassLoader().loadClass(ICC_SERVER_CLAZZ);
             Method method = clazz.getDeclaredMethod("getPkgHandler");
+            method.setAccessible(true);
             return (Handler) method.invoke(iccServer);
         } catch (Exception e) {
             e.printStackTrace();
