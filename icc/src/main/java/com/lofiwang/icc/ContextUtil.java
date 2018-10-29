@@ -4,8 +4,6 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 
 public class ContextUtil {
-
-
     public static final Context createPkgContext(Context base, String pkg) {
         Context context = null;
         try {
@@ -15,6 +13,4 @@ public class ContextUtil {
         }
         return context;
     }
-
-
 }

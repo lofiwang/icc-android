@@ -9,7 +9,6 @@ import android.util.Log;
 import com.lofiwang.icc.IccLifecycle;
 import com.lofiwang.icc.IccServer;
 import com.lofiwang.icc.ParcelUtil;
-import com.lofiwang.icc.ParcelableTest;
 import com.lofiwang.iccann.Icc;
 
 /**

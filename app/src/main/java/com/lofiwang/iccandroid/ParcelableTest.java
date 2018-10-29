@@ -1,4 +1,4 @@
-package com.lofiwang.icc;
+package com.lofiwang.iccandroid;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -23,7 +23,7 @@ public class ParcelableTest implements Parcelable {
     public ParcelableTest() {
     }
 
-    protected ParcelableTest(Parcel in) {
+    public ParcelableTest(Parcel in) {
         this.x = in.readInt();
         this.y = in.readInt();
         this.des = in.readString();

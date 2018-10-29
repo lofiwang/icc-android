@@ -4,7 +4,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 
 public class ParcelUtil {
     public static Object readValue(byte[] bytes, Class parcelableClazz) {
@@ -12,31 +11,18 @@ public class ParcelUtil {
         try {
             reply.unmarshall(bytes, 0, bytes.length);
             reply.setDataPosition(0);
-
             reply.readInt();
             reply.readDouble();
             reply.readString();
+            Constructor constructor = parcelableClazz.getDeclaredConstructor(Parcel.class);
+            constructor.setAccessible(true);
+            return constructor.newInstance(reply);
+        } catch (Exception e) {
+            e.printStackTrace();
         } finally {
             reply.recycle();
         }
-        Constructor constructor = null;
-        try {
-            constructor = parcelableClazz.getDeclaredConstructor(Parcel.class);
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        }
-
-        Object o = null;
-        try {
-            o = constructor.newInstance(reply);
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        }
-        return o;
+        return null;
     }
 
     public static byte[] writeValue(Parcelable parcelable) {
@@ -45,9 +31,12 @@ public class ParcelUtil {
         try {
             parcelable.writeToParcel(data, parcelable.describeContents());
             bytes = data.marshall();
+            return bytes;
+        } catch (Exception e) {
+            e.printStackTrace();
         } finally {
             data.recycle();
         }
-        return bytes;
+        return null;
     }
 }

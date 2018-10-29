@@ -8,7 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.lofiwang.icc.IccClient;
 import com.lofiwang.icc.ParcelUtil;
-import com.lofiwang.icc.ParcelableTest;
 
 public class MainActivity extends AppCompatActivity {
     private static final String PKG = "com.lofiwang.installedapk";
