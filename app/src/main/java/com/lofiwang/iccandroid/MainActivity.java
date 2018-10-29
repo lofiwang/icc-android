@@ -12,13 +12,15 @@ import com.lofiwang.icc.ParcelableTest;
 
 public class MainActivity extends AppCompatActivity {
     private static final String PKG = "com.lofiwang.installedapk";
+    IccClient iccClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        IccClient iccClient = new IccClient(this, new Handler(), PKG);
+        iccClient = new IccClient(this, new Handler(), PKG);
+        iccClient.onCreate();
 
         ParcelableTest parcelableTest = new ParcelableTest();
         parcelableTest.x = 0;
@@ -36,5 +38,11 @@ public class MainActivity extends AppCompatActivity {
         msg.getData().putParcelable("test1", notification);
 
         iccClient.getPkgHandler().sendMessage(msg);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        iccClient.onDestroy();
     }
 }

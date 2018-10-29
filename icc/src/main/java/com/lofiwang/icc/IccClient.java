@@ -2,20 +2,40 @@ package com.lofiwang.icc;
 
 import android.content.Context;
 import android.os.Handler;
+import android.util.Log;
 
-public class IccClient {
+public class IccClient implements IccLifecycle {
+    private static final String TAG = "IccClient";
     private Context base;
     private Handler handler;
     private String pkg;
     private Context pkgContext;
     private Handler pkgHandler;
+    private Object iccServer;
 
     public IccClient(Context base, Handler handler, String pkg) {
         this.base = base;
         this.handler = handler;
         this.pkg = pkg;
+    }
+
+    @Override
+    public void onCreate() {
+        Log.d(TAG, "onCreate");
         pkgContext = ContextUtil.createPkgContext(base, pkg);
-        pkgHandler = ContextUtil.getPkgHandler(base, pkgContext, handler);
+        iccServer = IccUtil.createIccServer(base, pkgContext, handler);
+        pkgHandler = IccUtil.getPkgHandler(pkgContext, iccServer);
+    }
+
+    @Override
+    public void onDestroy() {
+        Log.d(TAG, "onDestroy");
+        IccUtil.destroyIccServer(pkgContext, iccServer);
+        base = null;
+        handler = null;
+        pkg = null;
+        pkgContext = null;
+        pkgHandler = null;
     }
 
     public Context getBase() {
@@ -66,6 +86,7 @@ public class IccClient {
                 ", pkg='" + pkg + '\'' +
                 ", pkgContext=" + pkgContext +
                 ", pkgHandler=" + pkgHandler +
+                ", iccServer=" + iccServer +
                 '}';
     }
 }
