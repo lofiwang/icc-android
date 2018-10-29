@@ -36,6 +36,7 @@ public class IccClient extends IccLifecycle {
         pkg = null;
         pkgContext = null;
         pkgHandler = null;
+        iccServer = null;
     }
 
     public Context getBase() {

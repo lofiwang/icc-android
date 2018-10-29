@@ -14,13 +14,13 @@ public class IccServer extends IccLifecycle {
     private static WeakReference<Handler> sHandlerWeakReference;
 
     private Context base;
-    private Handler handler;
+    private Handler baseHandler;
     private Context pkgContext;
+    private Object iccAnnotated;
 
-
-    private IccServer(Context base, Context pkgContext, Handler handler) {
+    private IccServer(Context base, Context pkgContext, Handler baseHandler) {
         this.base = base;
-        this.handler = handler;
+        this.baseHandler = baseHandler;
         this.pkgContext = pkgContext;
         sInstance = this;
     }
@@ -29,11 +29,19 @@ public class IccServer extends IccLifecycle {
         return sInstance;
     }
 
-    public void setHandler(Handler handler) {
+    public Context getBaseContext() {
+        return base;
+    }
+
+    public Handler getBaseHandler() {
+        return baseHandler;
+    }
+
+    public void setReceiveHandler(Handler handler) {
         sHandlerWeakReference = new WeakReference<>(handler);
     }
 
-    public void removeHandler() {
+    public void removeReceiveHandler() {
         sHandlerWeakReference = null;
     }
 
@@ -41,15 +49,18 @@ public class IccServer extends IccLifecycle {
     protected void onCreate() {
         Log.d(TAG, "onCreate");
         sPkgHandler = new PkgHandler();
+        iccAnnotated = IccUtil.createIccAnnotated(pkgContext);
     }
 
     @Override
     protected void onDestroy() {
         Log.d(TAG, "onDestroy");
+        IccUtil.destroyIccAnnotated(pkgContext, iccAnnotated);
         base = null;
-        handler = null;
+        baseHandler = null;
         pkgContext = null;
         sPkgHandler = null;
+        iccAnnotated = null;
     }
 
     private final Handler getPkgHandler() {

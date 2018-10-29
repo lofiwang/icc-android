@@ -1,6 +1,7 @@
 package com.lofiwang.installedapk;
 
 import android.app.Notification;
+import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
@@ -17,7 +18,7 @@ import com.lofiwang.iccann.Icc;
 
 @Icc
 public class IccTest extends IccLifecycle {
-    private static final String TAG = "MainActivity";
+    private static final String TAG = "IccTest";
     Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -33,11 +34,12 @@ public class IccTest extends IccLifecycle {
 
     @Override
     protected void onCreate() {
-        IccServer.peekInstance().setHandler(handler);
+        IccServer.peekInstance().setReceiveHandler(handler);
+        Context base = IccServer.peekInstance().getBaseContext();
     }
 
     @Override
     protected void onDestroy() {
-        IccServer.peekInstance().removeHandler();
+        IccServer.peekInstance().removeReceiveHandler();
     }
 }
